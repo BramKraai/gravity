@@ -1,8 +1,8 @@
 var SIZE = 1;
-var N = 750;
+var N = 500;
 var G = 6.674E-2;
 var DT = 1/60;
-var V = .1*N;
+var V = 75;
 
 var canvas = $('canvas')[0];
 
@@ -16,7 +16,7 @@ $(window).resize(function(){
     var width = window.innerWidth, height = window.innerHeight;
     canvas.width = width; canvas.height = height;
     renderer.setSize(width, height);
-    composer.setSize(width*2, height*2);
+    composer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
@@ -78,7 +78,7 @@ $(function(){
 
     // Effects
     composer.addPass(new THREE.RenderPass(scene, camera));
-    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(1024, 102), .25, .75, .25));
+    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(32, 32), .25, .75, .25));
 
     // Animation Loop
     var animate = function() {
