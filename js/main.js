@@ -16,7 +16,7 @@ $(window).resize(function(){
     var width = window.innerWidth, height = window.innerHeight;
     canvas.width = width; canvas.height = height;
     renderer.setSize(width, height);
-    composer.setSize(width, height);
+    composer.setSize(width*2, height*2);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
@@ -54,14 +54,9 @@ $(function(){
     }
 
     // Simulate Gravity
-    var pingpong = true;
     var update = function() {
-
-        var S = pingpong ? 0 : Math.floor(N/2);
-        var E = pingpong ? Math.floor(N/2) : N;
-        
         // Calculate Velocities
-        for (var i=S; i<E; i++) {
+        for (var i=0; i<N; i++) {
             // Add force to center of 'world'
             var force = spheres[i].position.clone().multiplyScalar(-spheres[i].position.length()).normalize().multiplyScalar(N*mass[i]/10);
 
@@ -79,8 +74,6 @@ $(function(){
         for (var i=0; i<N; i++){
             spheres[i].position.add(velocity[i].clone().multiplyScalar(DT));
         }
-
-        pingpong = !pingpong;
     }
 
     // Effects
@@ -99,8 +92,8 @@ $(function(){
 
 var Sphere = function(radius, color) {
     var geometry = new THREE.SphereGeometry(radius,
-        Math.min(Math.max(Math.round(radius*6), 6), 16),
-        Math.min(Math.max(Math.round(radius*3), 3), 8))
+        Math.min(Math.max(Math.round(radius*6), 6), 32),
+        Math.min(Math.max(Math.round(radius*3), 3), 16))
     var material = new THREE.MeshBasicMaterial({color: color});
     return new THREE.Mesh(geometry, material);
 }
