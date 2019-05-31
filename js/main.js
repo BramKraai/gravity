@@ -6,7 +6,7 @@ var V = .1*N;
 
 var canvas = $('canvas')[0];
 
-var renderer = new THREE.WebGLRenderer({canvas: canvas});
+var renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
 var composer = new THREE.EffectComposer(renderer);
 var camera = new THREE.PerspectiveCamera(75, 1, 0.1, 10000);
 var controls = new THREE.OrbitControls(camera);
@@ -16,7 +16,7 @@ $(window).resize(function(){
     var width = window.innerWidth, height = window.innerHeight;
     canvas.width = width; canvas.height = height;
     renderer.setSize(width, height);
-    composer.setSize(width*2, height*2);
+    composer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 });
@@ -28,7 +28,6 @@ $(function(){
     controls.enableDamping = true;
     controls.autoRotateSpeed = .5;
     controls.autoRotate = true;
-    
 
     camera.position.z = 100;
     scene.background = new THREE.Color().setHSL(0, 0, 0.05);
@@ -55,11 +54,14 @@ $(function(){
     }
 
     // Simulate Gravity
+    var pingpong = true;
     var update = function() {
+
+        var S = pingpong ? 0 : Math.floor(N/2);
+        var E = pingpong ? Math.floor(N/2) : N;
         
         // Calculate Velocities
-        for (var i=0; i<N; i++) {
-
+        for (var i=S; i<E; i++) {
             // Add force to center of 'world'
             var force = spheres[i].position.clone().multiplyScalar(-spheres[i].position.length()).normalize().multiplyScalar(N*mass[i]/10);
 
@@ -77,6 +79,8 @@ $(function(){
         for (var i=0; i<N; i++){
             spheres[i].position.add(velocity[i].clone().multiplyScalar(DT));
         }
+
+        pingpong = !pingpong;
     }
 
     // Effects
@@ -95,8 +99,8 @@ $(function(){
 
 var Sphere = function(radius, color) {
     var geometry = new THREE.SphereGeometry(radius,
-        Math.min(Math.max(Math.round(radius*6), 6), 32),
-        Math.min(Math.max(Math.round(radius*3), 3), 16))
+        Math.min(Math.max(Math.round(radius*6), 6), 16),
+        Math.min(Math.max(Math.round(radius*3), 3), 8))
     var material = new THREE.MeshBasicMaterial({color: color});
     return new THREE.Mesh(geometry, material);
 }
