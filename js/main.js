@@ -1,5 +1,5 @@
 var SIZE = 1;
-var N = 1000;
+var N = 750;
 var G = 6.674E-2;
 var DT = 1/60;
 var V = .1*N;
@@ -26,14 +26,17 @@ $(function(){
 
     controls.enablePan = false;
     controls.enableDamping = true;
+    controls.autoRotateSpeed = .5;
+    controls.autoRotate = true;
+    
 
-    camera.position.z = 200;
+    camera.position.z = 100;
     scene.background = new THREE.Color().setHSL(0, 0, 0.05);
 
     // Create Sphere Data
     spheres = [], radii = [], mass = [], velocity = [];
     for (var i=0; i<N; i++){
-        var radius = -Math.log(Math.random());
+        var radius = Math.max(0.5, -Math.log(Math.random()));
         var color = new THREE.Color().setHSL(Math.random(), .5, .6)
 
         sphere = Sphere(radius, color);
@@ -76,12 +79,9 @@ $(function(){
         }
     }
 
-
-
     // Effects
     composer.addPass(new THREE.RenderPass(scene, camera));
-    composer.addPass(new THREE.UnrealBloomPass(1000, .25, .75, .25));
-
+    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(1024, 102), .25, .75, .25));
 
     // Animation Loop
     var animate = function() {
@@ -94,7 +94,9 @@ $(function(){
 });
 
 var Sphere = function(radius, color) {
-    var geometry = new THREE.SphereGeometry(radius,Math.round(radius*16),Math.round(radius*8));
+    var geometry = new THREE.SphereGeometry(radius,
+        Math.min(Math.max(Math.round(radius*6), 6), 32),
+        Math.min(Math.max(Math.round(radius*3), 3), 16))
     var material = new THREE.MeshBasicMaterial({color: color});
     return new THREE.Mesh(geometry, material);
 }
