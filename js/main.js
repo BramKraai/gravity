@@ -63,7 +63,6 @@ $(window).resize(function () {
 $(function () {
     $(window).trigger('resize');
     controls.enablePan = false;
-    controls.enableZoom = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.15;
     controls.autoRotateSpeed = .25;
@@ -182,7 +181,7 @@ var run = function() {
     // Effects
     composer.addPass(new THREE.RenderPass(scene, camera));
     composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .25, 0, .33));
-    // composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .15, 1, .33));
+    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .15, 1, .33));
     composer.addPass(new THREE.BokehPass(scene, camera, {
         focus: 1.25 * camera.position.z, aperture: 5E-5, maxblur: 0.015
     }))
