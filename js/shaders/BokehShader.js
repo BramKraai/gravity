@@ -81,7 +81,8 @@ THREE.BokehShader = {
 	
 			"float viewZ = getViewZ( getDepth( vUv ) );",
 
-			"float factor = ( focus + viewZ );",  // viewZ is <= 0, so this is a difference equation
+			// Only Blur Stuff Further than Focus
+			"float factor = min(0.0, focus + viewZ);",  // viewZ is <= 0, so this is a difference equation
 
 			"vec2 dofblur = vec2 ( clamp( factor * aperture, -maxblur, maxblur ) );",
 

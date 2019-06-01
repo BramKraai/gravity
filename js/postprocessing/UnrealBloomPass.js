@@ -94,7 +94,7 @@ THREE.UnrealBloomPass = function ( resolution, strength, radius, threshold ) {
 	this.compositeMaterial.uniforms[ "blurTexture4" ].value = this.renderTargetsVertical[ 3 ].texture;
 	this.compositeMaterial.uniforms[ "blurTexture5" ].value = this.renderTargetsVertical[ 4 ].texture;
 	this.compositeMaterial.uniforms[ "bloomStrength" ].value = strength;
-	this.compositeMaterial.uniforms[ "bloomRadius" ].value = 0.1;
+	this.compositeMaterial.uniforms[ "bloomRadius" ].value = 1;
 	this.compositeMaterial.needsUpdate = true;
 
 	var bloomFactors = [ 1.0, 0.8, 0.6, 0.4, 0.2 ];
