@@ -115,12 +115,12 @@ canvas { display: absolute; background: #ddd; }
     cursor: default;
 }
 .material-icons {
-    color: #555;
+    color: #555555;
     cursor: pointer;
     font-size: 32px;
 }
 .material-icons:hover{
-    color: #555555;
+    color: #999999;
 }
 
 .triangle {
@@ -128,7 +128,7 @@ canvas { display: absolute; background: #ddd; }
     width: 0; height: 0;
     padding: 0; margin: 0;
     left: 50px; bottom: -2px;
-    border-bottom: 18px solid #222;
+    border-bottom: 18px solid #222222;
     border-left: 150px solid transparent;
     opacity: 0.7;
   }
@@ -138,7 +138,7 @@ canvas { display: absolute; background: #ddd; }
     -webkit-appearance: none;
     height: 2px;
     border-radius: 5px;   
-    background: #555555;
+    background: #444444;
     outline: none;
     -webkit-transition: .2s;
     transition: opacity .2s;
@@ -153,7 +153,7 @@ canvas { display: absolute; background: #ddd; }
     width: 12px;
     height: 12px;
     border-radius: 50%; 
-    background: #777777;
+    background: #555555;
     cursor: pointer;
 }
 
@@ -161,8 +161,16 @@ canvas { display: absolute; background: #ddd; }
     width: 12px;
     height: 12px;
     border-radius: 50%; 
-    background: #777777;
+    background: #555555;
     cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background: #999999;
+}
+
+.slider::-moz-range-thumb:hover {
+    background: #999999;
 }
 
 #fullscreen { float: right; margin-right: 10px;}
