@@ -127,7 +127,7 @@ canvas { display: absolute; background: #ddd; }
     position: relative;
     width: 0; height: 0;
     padding: 0; margin: 0;
-    left: 40px; bottom: -5px;
+    left: 40px; bottom: -3px;
     border-bottom: 16px solid #222;
     border-left: 150px solid transparent;
     opacity: 0.7;
@@ -144,7 +144,7 @@ canvas { display: absolute; background: #ddd; }
     transition: opacity .2s;
     width: 150px;
     left: -150px; 
-    bottom: -18px;
+    bottom: -15px;
 }
 
 .slider::-webkit-slider-thumb {

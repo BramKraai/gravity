@@ -3,7 +3,7 @@ var DT = 1 / 60;
 
 var RES = 1024;
 
-var N = 250;
+var N = 500;
 var DISTANCE = 1;
 var VELOCITY = 100;
 
@@ -184,7 +184,7 @@ var run = function() {
     composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .25, 0, .33));
     // composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .15, 1, .33));
     composer.addPass(new THREE.BokehPass(scene, camera, {
-        focus: 1.25 * camera.position.z, aperture: 2E-4, maxblur: 0.015
+        focus: 1.25 * camera.position.z, aperture: 5E-5, maxblur: 0.015
     }))
 
     // Animation Loop
