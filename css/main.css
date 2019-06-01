@@ -110,7 +110,7 @@ html, body, canvas { width: 100%; height: 100%; background: #000;}
 canvas { display: absolute; background: #ddd; }
 #overlay {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     width: 100%;
     cursor: default;
 }
@@ -127,14 +127,14 @@ canvas { display: absolute; background: #ddd; }
     position: relative;
     width: 0; height: 0;
     padding: 0; margin: 0;
-    left: 40px; bottom: -3px;
-    border-bottom: 16px solid #222;
+    left: 50px; bottom: -2px;
+    border-bottom: 18px solid #222;
     border-left: 150px solid transparent;
     opacity: 0.7;
   }
 
 .slider {
-    position: absolute;
+    position: relative;
     -webkit-appearance: none;
     height: 2px;
     border-radius: 5px;   
@@ -144,7 +144,7 @@ canvas { display: absolute; background: #ddd; }
     transition: opacity .2s;
     width: 150px;
     left: -150px; 
-    bottom: -15px;
+    bottom: -4px;
 }
 
 .slider::-webkit-slider-thumb {
@@ -165,8 +165,8 @@ canvas { display: absolute; background: #ddd; }
     cursor: pointer;
 }
 
-#fullscreen { float: right;}
-#restart { float: left; }
+#fullscreen { float: right; margin-right: 10px;}
+#restart { float: left; margin-left: 10px; }
 
  /* ==========================================================================
    Helper classes
