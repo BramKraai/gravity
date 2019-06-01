@@ -1,16 +1,21 @@
-var DISTANCE = 1;
-var VELOCITY = 175;
-var N = 750;
 var G = 6.674E-2;
 var DT = 1 / 60;
 
+var RES = 1024;
+
+var N = 250;
+var DISTANCE = 1;
+var VELOCITY = 100;
+
 var canvas = $('canvas')[0];
 
-var renderer = new THREE.WebGLRenderer({ canvas: canvas });
+var renderer = new THREE.WebGLRenderer({canvas: canvas});
 var composer = new THREE.EffectComposer(renderer);
+
 var camera = new THREE.PerspectiveCamera(90, 1, 0.1, 2000);
-var controls = new THREE.OrbitControls(camera);
+var controls = new THREE.OrbitControls(camera, canvas);
 var scene = new THREE.Scene();
+
 
 // Full Screen Button
 function openFullscreen(elem) {
@@ -57,15 +62,14 @@ $(window).resize(function () {
 
 $(function () {
     $(window).trigger('resize');
-
     controls.enablePan = false;
     controls.enableZoom = false;
     controls.enableDamping = true;
     controls.dampingFactor = 0.15;
-    controls.autoRotateSpeed = .1;
+    controls.autoRotateSpeed = .25;
     controls.autoRotate = true;
 
-    camera.position.z = 200;
+    camera.position.z = 150;
     scene.background = new THREE.Color().setHSL(0, 0, 0.05);
 
     init();
@@ -86,9 +90,14 @@ $('#restart').click(function() {
     init();
 });
 
+var spheres, radii, mass, velocity;
+
 var init = function() {
 
     clearThree(scene);
+
+    N = $('#N').val();
+    VELOCITY = N / 3;
 
     // Create Sphere Data
     spheres = [], radii = [], mass = [], velocity = [];
@@ -172,10 +181,10 @@ var run = function() {
 
     // Effects
     composer.addPass(new THREE.RenderPass(scene, camera));
-    composer.addPass(new THREE.UnrealBloomPass(undefined, .2, 0, .33));
-    composer.addPass(new THREE.UnrealBloomPass(undefined, .2, 1, .33));
+    composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .25, 0, .33));
+    // composer.addPass(new THREE.UnrealBloomPass(new THREE.Vector2(RES, RES), .15, 1, .33));
     composer.addPass(new THREE.BokehPass(scene, camera, {
-        focus: 1.1 * camera.position.z, aperture: 5E-4, maxblur: 0.01
+        focus: 1.25 * camera.position.z, aperture: 2E-4, maxblur: 0.015
     }))
 
     // Animation Loop
